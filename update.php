@@ -61,8 +61,14 @@ if(isset($_POST['update']))
     $phone = $_POST['phone'];
     $state = $_POST['state'];
     $country = $_POST['country'];
-    $photo = $_POST['photo'];
+    $photo = $_FILES["photo"]["name"];
     $pincode = $_POST['pincode'];
+
+    $target_dir = "images/";
+    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $extensions_arr = array("jpg", "jpeg", "png", "gif");
+    move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
 
     if($photo == "")
     {
@@ -191,7 +197,7 @@ mysqli_close($conn);
       <a href="list.php" style="margin-left:1110px; color:red;">Profile</a>
       <a href="index.php" style="color:red">Home</a>
     </nav>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">>
       <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 
       <label for="name" style="color: red; display:flex; justify-content:flex-start;">Name</label>

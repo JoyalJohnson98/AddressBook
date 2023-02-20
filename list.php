@@ -16,20 +16,22 @@
       /* color: black; */
       font-size: 1.0rem;
       flex-direction: row;
-      margin:-10px;
+      margin: -10px;
     }
-    body{
+
+    body {
       background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZnpsrb6mp5xciB-fxBpf7ZfaZbE9pIfWFjw8JVeBaruuCr8lnd3luDgGOT3ajvkFBiww&usqp=CAU');
       background-repeat: no-repeat;
       background-position: center;
       background-attachment: fixed;
       background-size: 100vw 100vh;
     }
-    .mail{
+
+    .mail {
       display: flex;
       margin-left: 350px;
       font-size: 20px;
-      color:red;
+      color: red;
     }
 
     /* .navbar p {
@@ -40,11 +42,12 @@
     .navbar a {
       /* color: red; */
       text-decoration: none;
-       /* margin-left: 100px; */
-      padding: 10px; 
-      
+      /* margin-left: 100px; */
+      padding: 10px;
+
     }
-    .navbar h1{
+
+    .navbar h1 {
       margin-left: 450px;
     }
 
@@ -69,7 +72,7 @@
       font-family: arial, sans-serif;
       border-collapse: collapse;
       width: 90%;
-      
+
       margin-top: -90px;
     }
 
@@ -109,7 +112,7 @@
       font-size: 1.5em;
       /* background-image:  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_F8Wwa4Yq_gEIA-nPNTfrhJ_dtnvCoHfdTg&usqp=CAU");
       background-repeat: no-repeat; */
-      
+
     }
 
     #id2 {
@@ -129,7 +132,7 @@
       border-radius: 5px;
       font-size: 1.2rem;
       cursor: pointer;
-     
+
       height: 45px;
       margin: 5.5px;
       margin-left: 1000px;
@@ -141,7 +144,7 @@
     #address_table {
       display: none;
       margin: 10px;
-      
+
     }
 
     /* .myStyle{
@@ -167,13 +170,13 @@
 
   ?>
   <div class="navbar">
-    
+
     <h1 style="color:red;">Address Book</h1>
     <div class="mail">
-    <p ><?php echo $_SESSION['email'] ?></p>
-    <a href="list.php?logout=true" style="color:red;margin-top:10px; ">Logout</a>
+      <p><?php echo $_SESSION['email'] ?></p>
+      <a href="list.php?logout=true" style="color:red;margin-top:10px; ">Logout</a>
     </div>
-    
+
   </div>
   <!-- Show Address button -->
   <div id="id2" style="display: flex;flex-direction: row;">
@@ -181,98 +184,98 @@
     <button id="show_address">ShowAddress🏡</button>
   </div>
   <div class="container">
-  
-    
-    
+
+
+
     <p style="color:white"> Details on my Address Book.</p>
 
-  <div>
-    <!-- Address table -->
-    <table id="address_table">
-      <tr>
-        <th style="color:black">Name</th>
-        <th style="color:black">Phone</th>
-        <th style="color:black">State</th>
-        <th style="color:black">Country</th>
-        <th style="color:black">Photo</th>
-        <th style="color:black">Pincode</th>
-        <th style="color:black">Edit</th>
-        <th style="color:black">Delete</th>
-      </tr>
+    <div>
+      <!-- Address table -->
+      <table id="address_table">
+        <tr>
+          <th style="color:black">Name</th>
+          <th style="color:black">Phone</th>
+          <th style="color:black">State</th>
+          <th style="color:black">Country</th>
+          <th style="color:black">Photo</th>
+          <th style="color:black">Pincode</th>
+          <th style="color:black">Edit</th>
+          <th style="color:black">Delete</th>
+        </tr>
 
 
-      <?php
+        <?php
 
 
-      $email = '';
-      $password = '';
-      $id = 0;
+        $email = '';
+        $password = '';
+        $id = 0;
 
 
 
-      $servername = "localhost";
-      $username = "root";
-      $password = "joyaljohnson";
-      $dbname = "addressbook";
+        $servername = "localhost";
+        $username = "root";
+        $password = "joyaljohnson";
+        $dbname = "addressbook";
 
-      // Create connection
-      $conn = new mysqli($servername, $username, $password, $dbname);
-      // Check connection
-      if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-      }
-
-
-      $email = $_SESSION['email'];
-
-      $password = $_SESSION['password'];
-
-      $sql = "SELECT id FROM user WHERE email='$email' AND password='$password'";
-
-      $result = $conn->query($sql);
-
-      if ($result->num_rows > 0) {
-
-        $row = $result->fetch_assoc();
-        $id = $row["id"];
-      } else {
-        echo "0 results";
-      }
-
-
-      $sql = "SELECT id,name, phone, state, country, photo, pincode FROM address WHERE user_id = $id";
-      $result = $conn->query($sql);
-
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          echo "<tr>";
-          echo "<td>" . $row["name"] . "</td>";
-          echo "<td>" . $row["phone"] . "</td>";
-          echo "<td>" . $row["state"] . "</td>";
-          echo "<td>" . $row["country"] . "</td>";
-          echo "<td><img src='" . $row["photo"] . "' height='50' width='50' style='border-radius:50px'></td>";
-          echo "<td>" . $row["pincode"] . "</td>";
-          echo "<td><a href='update.php?id=" . $row['id'] . "'>Edit</a></td>";
-          echo "<td><a href='delete.php?id=" . $row['id'] . "' onClick='return confirm(\"Are you sure you want to delete?\")'>Delete</a></td>";
-
-          echo "</tr>";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
         }
-      } else {
-        echo "0 results";
-      }
 
-      ?>
 
-    </table>
-  </div>
+        $email = $_SESSION['email'];
 
-  <script>
-    document.getElementById("show_address").addEventListener("click", function() {
-      document.getElementById("address_table").style.display="inline-table"
-      // document.getElementById("address_table").classList.add("myStyle");
+        $password = $_SESSION['password'];
 
-    });
-  </script>
+        $sql = "SELECT id FROM user WHERE email='$email' AND password='$password'";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+
+          $row = $result->fetch_assoc();
+          $id = $row["id"];
+        } else {
+          echo "0 results";
+        }
+
+
+        $sql = "SELECT id,name, phone, state, country, photo, pincode FROM address WHERE user_id = $id";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["name"] . "</td>";
+            echo "<td>" . $row["phone"] . "</td>";
+            echo "<td>" . $row["state"] . "</td>";
+            echo "<td>" . $row["country"] . "</td>";
+            echo "<td><img src='images/" . $row["photo"] . "' height='50' width='50' style='border-radius:50px'></td>";
+            echo "<td>" . $row["pincode"] . "</td>";
+            echo "<td><a href='update.php?id=" . $row['id'] . "'>Edit</a></td>";
+            echo "<td><a href='delete.php?id=" . $row['id'] . "' onClick='return confirm(\"Are you sure you want to delete?\")'>Delete</a></td>";
+
+            echo "</tr>";
+          }
+        } else {
+          echo "0 results";
+        }
+
+        ?>
+
+      </table>
+    </div>
+
+    <script>
+      document.getElementById("show_address").addEventListener("click", function() {
+        document.getElementById("address_table").style.display = "inline-table"
+        // document.getElementById("address_table").classList.add("myStyle");
+
+      });
+    </script>
 </body>
 
 </html>
