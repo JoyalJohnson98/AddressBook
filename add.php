@@ -73,8 +73,8 @@ if (!preg_match('/^[\p{L} ]+$/u', $name)) {
   $is_valid = false;
 }
 
-if (!preg_match("/^[7-9][0-9]{9}$/", $phone)) {
-  $phone_error = "Mobile must start with 7, 8 or 9 and contain 10 digits";
+if (!preg_match("/^[0-9]{10}$/", $phone)) {
+  $phone_error = "Mobile must  contain 10 digits";
   $is_valid = false;
 }
 

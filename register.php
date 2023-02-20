@@ -56,8 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 
-  if (!preg_match("/^[7-9][0-9]{9}$/", $mobile)) {
-    $mobile_error = "Mobile must start with 7, 8 or 9 and contain 10 digits";
+  if (!preg_match("/^[0-9]{10}$/", $mobile)) {
+    $mobile_error = "Mobile must  contain 10 digits";
     $is_valid = false;
   }
 
